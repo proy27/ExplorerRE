@@ -14,14 +14,15 @@ namespace ExplorerRE
 		static void Main(string[] args)
 		{
 			var a = Path.GetFileNameWithoutExtension(path);
-			var bb = Process.GetProcessesByName(a).Any(p => p.MainModule.FileName == path);
+			//var asd = Process.GetProcessesByName(a);
+			var bb = Process.GetProcessesByName(a).Any(p => p.MainModule.FileName.ToUpper() == path.ToUpper());
 			if (bb == false)
 			{
 				Process.Start(path);
 			}
 			else
 			{
-				var b2 = Process.GetProcessesByName(a).First(p => p.MainModule.FileName == path);
+				var b2 = Process.GetProcessesByName(a).First(p => p.MainModule.FileName.ToUpper() == path.ToUpper());
 				b2.Kill();
 				Process.Start(path);
 			}
